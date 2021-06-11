@@ -1,6 +1,8 @@
 # EMNIST detection with fine-tuned Mobilenet-SSD on Raspberry Pi 4
-[![TensorFlow 2.5](https://img.shields.io/badge/TensorFlow-2.5-FF6F00?logo=tensorflow&style=flat-square)](https://github.com/tensorflow/tensorflow/releases/tag/v2.5.0)
-[![Python 3.9](https://img.shields.io/badge/Python-3.9-3776AB?logo=python&style=flat-square)](https://www.python.org/downloads/release/python-390/)
+[![TensorFlow 2.5.0](https://img.shields.io/badge/TensorFlow-2.5.0-FF6F00?logo=tensorflow&style=flat-square)](https://github.com/tensorflow/tensorflow/releases/tag/v2.5.0)
+[![Python 3.8.8](https://img.shields.io/badge/Python-3.8.8-3776AB?logo=python&style=flat-square)](https://www.python.org/downloads/release/python-388/)
+[![Anaconda 4.10.1](https://img.shields.io/badge/Anaconda-4.10.1-44A833?logo=anaconda&style=flat-square)](https://github.com/conda/conda/releases/tag/4.10.1)
+[![Raspberry Pi 4](https://img.shields.io/badge/Raspberry%20Pi-4%20Model%20B-A22846?logo=Raspberry%20Pi&style=flat-square)](https://www.raspberrypi.org/products/raspberry-pi-4-model-b/)
 
 ## Install Object Detection API with TensorFlow 2
 [installation instructions](research/object_detection/g3doc/tf2.md#installation)
