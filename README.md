@@ -12,7 +12,7 @@
 ❗ A, B, C, D만 사용하였습니다.
 
 ![Image of Dataset Generate Example](dataset_generate_example.png)
-- Run visualize_dataset.py
+- Run generate_data.py
 ```powershell
     python generate_data.py --data_dir="d:/tensorflow_dataset"
 ``` 
