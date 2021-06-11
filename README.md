@@ -3,14 +3,27 @@
 ## Install Object Detection API with TensorFlow 2
 [installation instructions](research/object_detection/g3doc/tf2.md#installation)
 
+- Change Directory to research
+```powershell
+    cd research
+``` 
+
 ## EMNIST(letters) Object Detection Dataset
 ❗ A, B, C, D만 사용하였습니다.
 
 ![Image of Dataset Generate Example](dataset_generate_example.png)
-- research/generate_data.py 실행
+- Run visualize_dataset.py
+```powershell
+    python generate_data.py --data-dir="d:/tensorflow_dataset"
+``` 
+
+❗ COCO 2017을 사용하므로 다운로드 및 압축 해제 시간이 오래 걸립니다.(1~2시간)
 
 ![Image of Dataset Example](dataset_example.jpg)
-- research/visualize_dataset.py 실행
+- Run visualize_dataset.py
+```powershell
+    python visualize_dataset.py
+``` 
 
 ## TFRecord
 - Run generate_tfrecord.py
@@ -35,12 +48,14 @@
 ```
 
 ## TFLite Convertor
-- ckpt to pb
+- convert ckpt to pb
 ```powershell
     python object_detection/export_tflite_graph_tf2.py --pipeline_config_path "model_zoo/ssd_mobilenet_v2_320x320_coco17_tpu-8/pipeline.config" --trained_checkpoint_dir "custom_models\ssd_mobilenet_v2_320x320_coco17_tpu-8" --output_directory "custom_models/ssd_mobilenet_v2_320x320_coco17_tpu-8"
 ```
-- pb to tflite
-    - research/generate_tflite.py 실행
+- convert pb to tflite
+```powershell
+    python generate_tflite.py
+```
 
 ## Raspberry Pi 4
 [Pi image installation instructions](https://github.com/Qengineering/TensorFlow_Lite_SSD_RPi_64-bits)
