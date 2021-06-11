@@ -16,9 +16,9 @@
 ❗ A, B, C, D만 사용하였습니다.
 
 ![Image of Dataset Generate Example](dataset_generate_example.png)
-- Run generate_data.py
+- Run generate_dataset.py
 ```powershell
-    python generate_data.py --data_dir="d:/tensorflow_dataset"
+    python generate_dataset.py --data_dir="d:/tensorflow_dataset"
 ``` 
 
 ❗ COCO 2017을 사용하므로 다운로드 및 압축 해제 시간이 오래 걸립니다.(1~2시간)
@@ -38,15 +38,15 @@
 ## Training and Evaluation with TensorFlow 2
 > [Training and evaluation guide (CPU, GPU, or TPU)](research/object_detection/g3doc/tf2_training_and_evaluation.md#Local)
 
-- Training Command
+### Training Command
 ```powershell
     python object_detection/model_main_tf2.py --pipeline_config_path="model_zoo/ssd_mobilenet_v2_320x320_coco17_tpu-8/pipeline.config" --model_dir="custom_models/ssd_mobilenet_v2_320x320_coco17_tpu-8" --alsologtostderr
 ```
-- Evaluation Command
+### Evaluation Command
 ```powershell
     python object_detection/model_main_tf2.py --pipeline_config_path="model_zoo/ssd_mobilenet_v2_320x320_coco17_tpu-8/pipeline.config" --model_dir="custom_models/ssd_mobilenet_v2_320x320_coco17_tpu-8" --checkpoint_dir="custom_models\ssd_mobilenet_v2_320x320_coco17_tpu-8" --alsologtostderr
 ```
-- Running Tensorboard
+### Running Tensorboard
 ```powershell
     tensorboard --logdir="custom_models/ssd_mobilenet_v2_320x320_coco17_tpu-8"
 ```
