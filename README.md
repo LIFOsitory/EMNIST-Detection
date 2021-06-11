@@ -14,7 +14,7 @@
 ![Image of Dataset Generate Example](dataset_generate_example.png)
 - Run visualize_dataset.py
 ```powershell
-    python generate_data.py --data-dir="d:/tensorflow_dataset"
+    python generate_data.py --data_dir="d:/tensorflow_dataset"
 ``` 
 
 ❗ COCO 2017을 사용하므로 다운로드 및 압축 해제 시간이 오래 걸립니다.(1~2시간)
