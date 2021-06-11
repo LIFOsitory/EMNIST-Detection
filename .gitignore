@@ -96,3 +96,7 @@ ENV/
 
 # For mac
 .DS_Store
+
+# Custom dataset
+research/dataset/emnist_letters_detection/train
+research/dataset/emnist_letters_detection/test
