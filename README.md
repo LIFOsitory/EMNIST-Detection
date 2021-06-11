@@ -1,4 +1,4 @@
-# Charcter detection with fine-tuned Mobilenet-SSD on Raspberry Pi 4
+# EMNIST detection with fine-tuned Mobilenet-SSD on Raspberry Pi 4
 
 ## Install Object Detection API with TensorFlow 2
 [installation instructions](research/object_detection/g3doc/tf2.md#installation)
@@ -6,14 +6,20 @@
 ## EMNIST(letters) Object Detection Dataset
 ❗ A, B, C, D만 사용하였습니다.
 
-![Image of Dataset Example](dataset_example.jpg)
-
 ![Image of Dataset Generate Example](dataset_generate_example.png)
-
 - research/generate_data.py 실행
+
+![Image of Dataset Example](dataset_example.jpg)
+- research/visualize_dataset.py 실행
 
 ## TFRecord
 - research/generate_tfrecord.py 실행
+
+## Training and Evaluation with TensorFlow 2
+[Training and evaluation guide (CPU, GPU, or TPU)](research/object_detection/g3doc/tf2_training_and_evaluation.md#Local)
+
+## TFLite Convertor
+- research/tfconvert.py 실행
 
 ## Reference
 - [Training and Evaluation with TensorFlow 2](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf2_training_and_evaluation.md)
