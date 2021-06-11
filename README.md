@@ -13,13 +13,37 @@
 - research/visualize_dataset.py 실행
 
 ## TFRecord
-- research/generate_tfrecord.py 실행
+- Run generate_tfrecord.py
+```powershell
+    python generate_tfrecord.py
+```
 
 ## Training and Evaluation with TensorFlow 2
-[Training and evaluation guide (CPU, GPU, or TPU)](research/object_detection/g3doc/tf2_training_and_evaluation.md#Local)
+> [Training and evaluation guide (CPU, GPU, or TPU)](research/object_detection/g3doc/tf2_training_and_evaluation.md#Local)
+
+- Training Command
+```powershell
+    python object_detection/model_main_tf2.py --pipeline_config_path="model_zoo/ssd_mobilenet_v2_320x320_coco17_tpu-8/pipeline.config" --model_dir="custom_models/ssd_mobilenet_v2_320x320_coco17_tpu-8" --alsologtostderr
+```
+- Evaluation Command
+```powershell
+    python object_detection/model_main_tf2.py --pipeline_config_path="model_zoo/ssd_mobilenet_v2_320x320_coco17_tpu-8/pipeline.config" --model_dir="custom_models/ssd_mobilenet_v2_320x320_coco17_tpu-8" --checkpoint_dir="custom_models\ssd_mobilenet_v2_320x320_coco17_tpu-8" --alsologtostderr
+```
+- Running Tensorboard
+```powershell
+    tensorboard --logdir="custom_models/ssd_mobilenet_v2_320x320_coco17_tpu-8"
+```
 
 ## TFLite Convertor
-- research/tfconvert.py 실행
+- ckpt to pb
+```powershell
+    python object_detection/export_tflite_graph_tf2.py --pipeline_config_path "model_zoo/ssd_mobilenet_v2_320x320_coco17_tpu-8/pipeline.config" --trained_checkpoint_dir "custom_models\ssd_mobilenet_v2_320x320_coco17_tpu-8" --output_directory "custom_models/ssd_mobilenet_v2_320x320_coco17_tpu-8"
+```
+- pb to tflite
+    - research/generate_tflite.py 실행
+
+## Raspberry Pi 4
+[Pi image installation instructions](https://github.com/Qengineering/TensorFlow_Lite_SSD_RPi_64-bits)
 
 ## Reference
 - [Training and Evaluation with TensorFlow 2](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf2_training_and_evaluation.md)
