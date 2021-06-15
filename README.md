@@ -6,7 +6,7 @@
 
 > This repository is forked from [tensorflow/models](https://github.com/tensorflow/models) and modified by [LIFOsitory](https://github.com/LIFOsitory)
 
-### Append and Modified Directory and Files
+### Appended and Modified Directories and Files
 - custom_models
 - model_zoo
 - generate_dataset_old.py
@@ -19,6 +19,7 @@
 - detect_old.tflite
 
 ## Install Object Detection API with TensorFlow 2
+> [Object Detection API with TensorFlow 2](research/object_detection/g3doc/tf2.md#installation)
 
 ### Python Package Installation
 
@@ -35,18 +36,18 @@ python -m pip install --use-feature=2020-resolver .
 python object_detection/builders/model_builder_tf2_test.py
 ```
 
-## Generating EMNIST letters Object Detection dataset
+## Generate EMNIST letters Object Detection dataset
 
 ![Image of Dataset Example](dataset_example.jpg)
 
 Dataset for object detection on EMNIST letters with COCO 2017 Background. By default, the script generates a dataset with the following attributes:
 
-- 10,000 images in train. 10,00 images in test
+- 10,000 images in train. 1,000 images in test
 - 26 Classes(A ~ Z)
 - Between 1 and 5 letters per image
 - Gaussian Blur
 
-### Generating dataset
+### Generate dataset
 
 ![Image of Dataset Generate Example](dataset_generate_example.png)
 
@@ -58,7 +59,7 @@ Dataset for object detection on EMNIST letters with COCO 2017 Background. By def
 
 ❗ 파일의 용량이 매우 큽니다.
 
-### Visualizing dataset
+### Visualize dataset
 
 The dataset can be visualized with the following command:
 
@@ -66,7 +67,7 @@ The dataset can be visualized with the following command:
     python visualize_dataset.py
 ``` 
 
-## Generating the TFRecord file
+## Generate the TFRecord file
 > [Preparing Inputs](research/object_detection/g3doc/using_your_own_dataset.md)
 
 The dataset can be converted to TFRecord file with the following command: 
@@ -75,7 +76,7 @@ The dataset can be converted to TFRecord file with the following command:
     python generate_tfrecord.py
 ```
 
-## Training and Evaluation with TensorFlow 2
+## Train and Evaluate with TensorFlow 2
 > [Training and evaluation guide (CPU, GPU, or TPU)](research/object_detection/g3doc/tf2_training_and_evaluation.md#Local)
 
 ### Training Command
@@ -85,6 +86,7 @@ A local training job can be run with the following command:
 ```bash
     python object_detection/model_main_tf2.py --pipeline_config_path="model_zoo/ssd_mobilenet_v2_320x320_coco17_tpu-8/pipeline.config" --model_dir="custom_models/ssd_mobilenet_v2_320x320_coco17_tpu-8" --alsologtostderr
 ```
+
 ### Evaluation Command
 
 A local evaluation job can be run with the following command:
@@ -92,6 +94,7 @@ A local evaluation job can be run with the following command:
 ```bash
     python object_detection/model_main_tf2.py --pipeline_config_path="model_zoo/ssd_mobilenet_v2_320x320_coco17_tpu-8/pipeline.config" --model_dir="custom_models/ssd_mobilenet_v2_320x320_coco17_tpu-8" --checkpoint_dir="custom_models\ssd_mobilenet_v2_320x320_coco17_tpu-8" --alsologtostderr
 ```
+
 ### Running Tensorboard
 
 Progress for training and eval jobs can be inspected using Tensorboard. If using the recommended directory structure, Tensorboard can be run using the following command:
@@ -100,14 +103,16 @@ Progress for training and eval jobs can be inspected using Tensorboard. If using
     tensorboard --logdir="custom_models/ssd_mobilenet_v2_320x320_coco17_tpu-8"
 ```
 
-### Infer Checkpoint File
+### Run inference with checkpoint file
+> [Run inference with models from the zoo](research/object_detection/colab_tutorials/inference_tf2_colab.ipynb)
 
 ```bash
     python infer_ckpt.py
 ```
 
-## Running TF2 Models on Raspberry Pi
+## Run TF2 Models on Raspberry Pi
 > [Running TF2 Detection API Models on mobile](research/object_detection/g3doc/running_on_mobile_tf2.md#step-1-export-tflite-inference-graph)
+
 ### Export TFLite inference grpah
 
 An intermediate SavedModel that can be used with the TFLite Converter via commandline or Python API can be generated with the following command: 
@@ -115,6 +120,7 @@ An intermediate SavedModel that can be used with the TFLite Converter via comman
 ```bash
     python object_detection/export_tflite_graph_tf2.py --pipeline_config_path "model_zoo/ssd_mobilenet_v2_320x320_coco17_tpu-8/pipeline.config" --trained_checkpoint_dir "custom_models\ssd_mobilenet_v2_320x320_coco17_tpu-8" --output_directory "custom_models/ssd_mobilenet_v2_320x320_coco17_tpu-8"
 ```
+
 ### Convert to TFLite
 
 The SavedModel can be converted to TFLite with the following command: 
@@ -129,7 +135,7 @@ You can infer the TFLite file with the following command:
     python test_tflite.py
 ```
 
-### Running model on Raspberry Pi 4
+### Run TFLite Model on Raspberry Pi 4
 
 #### C++
 
