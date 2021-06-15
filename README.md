@@ -39,7 +39,7 @@ python object_detection/builders/model_builder_tf2_test.py
 
 ![Image of Dataset Generate Example](dataset_generate_example.png)
 
-A ~ Z, Random Crop
+A ~ Z, Random Crop, Gaussian Blur
 
 - Run generate_dataset.py
 ```bash
@@ -100,9 +100,11 @@ A ~ Z, Random Crop
 
 ## Raspberry Pi 4
 - C++
+
 [Pi image installation instructions](https://github.com/Qengineering/TensorFlow_Lite_SSD_RPi_64-bits)
 
 - Python
+
 [TensorFlow Lite Python object detection example with Pi Camera](https://github.com/tensorflow/examples/tree/master/lite/examples/object_detection/raspberry_pi)
 
 ## Legacy
@@ -125,6 +127,13 @@ A ~ D 만을 학습한 ckpt 파일  (step 50000)
 
 A ~ D 만 탐지하는 tflite 파일
 
+- Evaluation Sample
+
+![Image of Prediction Example](dataset_predict_old.png)
+
+- 일반적인 글자 이미지에 대해서 학습하지 않아 구글 이미지에 대해서는 성능이 좋지 못함.
+ 
+![A in google image](example_a_old.jpg)
 
 ## Reference
 - [Training and Evaluation with TensorFlow 2](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf2_training_and_evaluation.md)
