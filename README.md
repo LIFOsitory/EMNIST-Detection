@@ -4,9 +4,9 @@
 [![Anaconda 4.10.1](https://img.shields.io/badge/Anaconda-4.10.1-44A833?logo=anaconda&style=flat-square)](https://github.com/conda/conda/releases/tag/4.10.1)
 [![Raspberry Pi 4](https://img.shields.io/badge/Raspberry%20Pi-4%20Model%20B-A22846?logo=Raspberry%20Pi&style=flat-square)](https://www.raspberrypi.org/products/raspberry-pi-4-model-b/)
 
-> This repository is forked from [tensorflow/models](https://github.com/tensorflow/models) and modified by LIFOsitory
+> This repository is forked from [tensorflow/models](https://github.com/tensorflow/models) and modified by [LIFOsitory](https://github.com/LIFOsitory)
 
-**Append and Modified Directory and Files**
+### Append and Modified Directory and Files
 - custom_models
 - model_zoo
 - generate_dataset_old.py
@@ -35,13 +35,21 @@ python -m pip install --use-feature=2020-resolver .
 python object_detection/builders/model_builder_tf2_test.py
 ```
 
-## EMNIST(letters) Object Detection Dataset
+## Generating EMNIST letters Object Detection dataset
+
+![Image of Dataset Example](dataset_example.jpg)
+
+Dataset for object detection on EMNIST letters with COCO 2017 Background. By default, the script generates a dataset with the following attributes:
+
+- 10,000 images in train. 10,00 images in test
+- 26 Classes(A ~ Z)
+- Between 1 and 5 letters per image
+- Gaussian Blur
+
+### Generating dataset
 
 ![Image of Dataset Generate Example](dataset_generate_example.png)
 
-A ~ Z, Random Crop, Gaussian Blur
-
-- Run generate_dataset.py
 ```bash
     python generate_dataset.py --data_dir="d:/tensorflow_dataset"
 ``` 
@@ -50,15 +58,19 @@ A ~ Z, Random Crop, Gaussian Blur
 
 ❗ 파일의 용량이 매우 큽니다.
 
-![Image of Dataset Example](dataset_example.jpg)
+### Visualizing dataset
 
-- Run visualize_dataset.py
+The dataset can be visualized with the following command:
+
 ```bash
     python visualize_dataset.py
 ``` 
 
-## Generating a TFRecord file
-- Run generate_tfrecord.py
+## Generating the TFRecord file
+> [Preparing Inputs](research/object_detection/g3doc/using_your_own_dataset.md)
+
+The dataset can be converted to TFRecord file with the following command: 
+
 ```bash
     python generate_tfrecord.py
 ```

@@ -138,11 +138,7 @@ def generate_dataset(dirpath: pathlib.Path,
             digit = cv2.resize(digit, (width, width))
             label = emnist_letters_labels[digit_idx]
             labels.append(label)
-                # if label <= 4:
-                #     labels.append(label)
-                #     break
             assert im[x0:x0+width, y0:y0+width].shape == digit.shape, f"imshape: {im[x0:x0+width, y0:y0+width].shape}, digit shape: {digit.shape}"
-            # bbox = tight_bbox(digit, [x0, y0, x0+width, y0+width])
             bbox = tight_bbox(digit, [y0, x0, y0+width, x0+width])
             bboxes.append(bbox)
 
