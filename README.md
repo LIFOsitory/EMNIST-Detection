@@ -5,12 +5,19 @@
 [![Raspberry Pi 4](https://img.shields.io/badge/Raspberry%20Pi-4%20Model%20B-A22846?logo=Raspberry%20Pi&style=flat-square)](https://www.raspberrypi.org/products/raspberry-pi-4-model-b/)
 
 ## Install Object Detection API with TensorFlow 2
-[installation instructions](research/object_detection/g3doc/tf2.md#installation)
 
-- Change Directory to research
+### Python Package Installation
+
 ```powershell
-    cd research
-``` 
+cd models/research
+# Compile protos.
+protoc object_detection/protos/*.proto --python_out=.
+# Install TensorFlow Object Detection API.
+cp object_detection/packages/tf2/setup.py .
+python -m pip install --use-feature=2020-resolver .
+# Test the installation.
+python object_detection/builders/model_builder_tf2_test.py
+```
 
 ## EMNIST(letters) Object Detection Dataset
 ❗ A, B, C, D만 사용하였습니다.
