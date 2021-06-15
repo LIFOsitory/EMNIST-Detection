@@ -70,6 +70,8 @@ The dataset can be visualized with the following command:
 ## Generate the TFRecord file
 > [Preparing Inputs](research/object_detection/g3doc/using_your_own_dataset.md)
 
+![Image of TFRecord Generate Example](tfrecord_generate_example.png)
+
 The dataset can be converted to TFRecord file with the following command: 
 
 ```bash
