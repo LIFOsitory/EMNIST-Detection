@@ -55,9 +55,7 @@ Dataset for object detection on EMNIST letters with COCO 2017 Background. By def
     python generate_dataset.py --data_dir="d:/tensorflow_dataset"
 ``` 
 
-❗ COCO 2017을 사용하므로 다운로드 및 압축 해제 시간이 오래 걸립니다.(1~2시간)
-
-❗ 파일의 용량이 매우 큽니다.
+❗ COCO 2017을 사용하므로 다운로드(25.20 GiB) 및 압축 해제 시간이 오래 걸립니다.(1~2시간)
 
 ### Visualize dataset
 
