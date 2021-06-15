@@ -66,7 +66,7 @@ def tight_bbox(digit, orig_bbox):
             break
         shift += 1
     xmax -= shift
-    # ymin
+    ymin
     shift = 0
     for i in range(digit.shape[0]):
         if digit[i, :].sum() != 0:
@@ -98,7 +98,7 @@ def generate_dataset(dirpath: pathlib.Path,
                      num_images: int,
                      max_digit_size: int,
                      min_digit_size: int,
-                    #  imsize: int,
+                     imsize: int,
                      max_digits_per_image: int,
                      emnist_letters_images: np.ndarray,
                      emnist_letters_labels: np.ndarray,
@@ -114,61 +114,47 @@ def generate_dataset(dirpath: pathlib.Path,
     label_dir.mkdir(exist_ok=True, parents=True)
     coco_ds = tuple(coco_ds.take(num_images))
     for image_id in tqdm.trange(num_images, desc=f"Generating dataset, saving to: {dirpath}"):
-        bg_idx = np.random.randint(0, len(coco_ds))
-        bg_image = coco_ds[bg_idx]["image"]
-        bg_width, bg_height, _ = bg_image.shape
-        im = np.zeros((bg_width, bg_height), dtype=np.float32)
+        im = np.zeros((imsize, imsize), dtype=np.float32)
         labels = []
         bboxes = []
         num_images = np.random.randint(1, max_digits_per_image)
         for _ in range(num_images):
             while True:
                 width = np.random.randint(min_digit_size, max_digit_size)
-                if bg_width-width <= 0 or bg_height-width <= 0:
-                    continue
-
-                x0 = np.random.randint(0, bg_width-width)
-                y0 = np.random.randint(0, bg_height-width)
+                x0 = np.random.randint(0, imsize-width)
+                y0 = np.random.randint(0, imsize-width)
                 ious = compute_iou_all([x0, y0, x0+width, y0+width], bboxes)
-                if max(ious) < 0.1:
+                if max(ious) < 0.25:
                     break
-            # while True:
-            digit_idx = np.random.randint(0, len(emnist_letters_images))
-            digit = emnist_letters_images[digit_idx].astype(np.float32)
-            digit = cv2.resize(digit, (width, width))
-            label = emnist_letters_labels[digit_idx]
-            labels.append(label)
-                # if label <= 4:
-                #     labels.append(label)
-                #     break
-            assert im[x0:x0+width, y0:y0+width].shape == digit.shape, f"imshape: {im[x0:x0+width, y0:y0+width].shape}, digit shape: {digit.shape}"
-            # bbox = tight_bbox(digit, [x0, y0, x0+width, y0+width])
-            bbox = tight_bbox(digit, [y0, x0, y0+width, x0+width])
+            while True:
+                digit_idx = np.random.randint(0, len(emnist_letters_images))
+                digit = emnist_letters_images[digit_idx].astype(np.float32)
+                digit = cv2.resize(digit, (width, width))
+                label = emnist_letters_labels[digit_idx]
+                if label <= 4:
+                    labels.append(label)
+                    break
+
+            assert im[y0:y0+width, x0:x0+width].shape == digit.shape, \
+                f"imshape: {im[y0:y0+width, x0:x0+width].shape}, digit shape: {digit.shape}"
+            bbox = tight_bbox(digit, [x0, y0, x0+width, y0+width])
             bboxes.append(bbox)
 
-            im[x0:x0+width, y0:y0+width] += digit
+            im[y0:y0+width, x0:x0+width] += digit
             im[im > max_image_value] = max_image_value
         
-        # while True:
-        #     bg_idx = np.random.randint(0, len(coco_ds))
-        #     bg_image = coco_ds[bg_idx]["image"]
-        #     if bg_image.shape[0] >= 300 and bg_image.shape[1] >= 300:
-        #         break
-
-        bg_image = tfds.as_numpy(bg_image)
-        
+        bg_idx = np.random.randint(0, len(coco_ds))
+        bg_image = tfds.as_numpy(tf.image.resize(coco_ds[bg_idx]["image"], [300, 300]))
             
 
         image_target_path = image_dir.joinpath(f"{image_id}.jpg")
         label_target_path = label_dir.joinpath(f"{image_id}.txt")
 
         # Randomized pixel image
-        # bg_image = np.random.random((300, 300, 3)) * 255
-
         im = 255 - im
         im = np.stack((im,) * 3, axis=-1)
-        im = np.where(im >= 200, bg_image, im)
-        im = cv2.GaussianBlur(im, (3,3), 0)
+        # r_im = np.random.random((300, 300, 3)) * 255
+        im = np.where(im == 255, bg_image, im)
         im = im.astype(np.uint8)
         is_success, im_buf_arr = cv2.imencode(".jpg", cv2.cvtColor(im, cv2.COLOR_RGB2BGR))
         if is_success:
@@ -187,14 +173,14 @@ if __name__ == "__main__":
     parser.add_argument(
         "--base-path", default="dataset/emnist_letters_detection"
     )
-    # parser.add_argument(
-    #     "--imsize", default=300, type=int
-    # )
     parser.add_argument(
-        "--max-digit-size", default=200, type=int
+        "--imsize", default=300, type=int
     )
     parser.add_argument(
-        "--min-digit-size", default=30, type=int
+        "--max-digit-size", default=100, type=int
+    )
+    parser.add_argument(
+        "--min-digit-size", default=15, type=int
     )
     parser.add_argument(
         "--num-train-images", default=10000, type=int
@@ -208,30 +194,36 @@ if __name__ == "__main__":
     parser.add_argument(
         "--subset", default='letters', type=str
     )
+    parser.add_argument(
+        "--data_dir", default='~/tensorflow_dataset', type=str
+    )
     args = parser.parse_args()
 
+    # (X_train, Y_train) = emnist.extract_training_samples(args.subset)
+    # (X_test, Y_test) = emnist.extract_test_samples(args.subset)
+
     emnist_letters_train_image, emnist_letters_train_label = tfds.as_numpy(tfds.load(
-        'emnist/letters',
+        f'emnist/{args.subset}',
         split='train',
         batch_size=-1,
         as_supervised=True,
         shuffle_files=True,
-        data_dir="d:/tensorflow_dataset/"
+        data_dir=args.data_dir
     ))
 
     emnist_letters_test_image, emnist_letters_test_label = tfds.as_numpy(tfds.load(
-        'emnist/letters',
+        f'emnist/{args.subset}',
         split='test',
         batch_size=-1,
         as_supervised=True,
         shuffle_files=True,
-        data_dir="d:/tensorflow_dataset/"
+        data_dir=args.data_dir
     ))
 
     coco_train_ds = tfds.load(
         'coco/2017',
         split='train',
-        data_dir="d:/tensorflow_dataset/",
+        data_dir=args.data_dir,
         shuffle_files=True
     )
     assert isinstance(coco_train_ds, tf.data.Dataset)
@@ -239,7 +231,7 @@ if __name__ == "__main__":
     coco_test_ds = tfds.load(
         'coco/2017',
         split='test',
-        data_dir="d:/tensorflow_dataset/",
+        data_dir=args.data_dir,
         shuffle_files=True,
     )
     assert isinstance(coco_test_ds, tf.data.Dataset)
@@ -254,7 +246,7 @@ if __name__ == "__main__":
             num_images,
             args.max_digit_size,
             args.min_digit_size,
-            # args.imsize,
+            args.imsize,
             args.max_digits_per_image,
             target_images,
             target_labels,

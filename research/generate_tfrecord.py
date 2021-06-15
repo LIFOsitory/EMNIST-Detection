@@ -46,7 +46,7 @@ def image_to_tf_data(img_path, label_path, label_map_dict):
       raise ValueError('Image format not JPEG')
     key = hashlib.sha256(encoded_jpg).hexdigest()
 
-    height, width = image.size
+    width, height = image.size
 
     classes, classes_text = [], []
     xmins, ymins, xmaxs, ymaxs = [], [], [], []

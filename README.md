@@ -6,11 +6,15 @@
 
 > This repository is forked from [tensorflow/models](https://github.com/tensorflow/models) and modified by LIFOsitory
 
-- Append and Modified Files
+- Append and Modified Directory and Files
+    - model_zoo
+    - generate_dataset_old.py
     - generate_dataset.py
     - visualize_dataset.py
     - generate_tfrecord.py
     - generate_tflite.py
+    - infer_ckpt.py
+    - test_tflite.py
 
 ## Install Object Detection API with TensorFlow 2
 
@@ -20,6 +24,8 @@
 cd models/research
 # Compile protos.
 protoc object_detection/protos/*.proto --python_out=.
+# Install TensorFlow
+pip install tensorflow-gpu
 # Install TensorFlow Object Detection API.
 cp object_detection/packages/tf2/setup.py .
 python -m pip install --use-feature=2020-resolver .
@@ -30,6 +36,9 @@ python object_detection/builders/model_builder_tf2_test.py
 ## EMNIST(letters) Object Detection Dataset
 
 ![Image of Dataset Generate Example](dataset_generate_example.png)
+
+A ~ Z, Random Crop
+
 - Run generate_dataset.py
 ```bash
     python generate_dataset.py --data_dir="d:/tensorflow_dataset"
@@ -67,6 +76,11 @@ python object_detection/builders/model_builder_tf2_test.py
     tensorboard --logdir="custom_models/ssd_mobilenet_v2_320x320_coco17_tpu-8"
 ```
 
+### Infer Checkpoint File
+```bash
+    python infer_ckpt.py
+```
+
 ## TFLite Convertor
 - convert ckpt to pb
 ```bash
@@ -77,11 +91,34 @@ python object_detection/builders/model_builder_tf2_test.py
     python generate_tflite.py
 ```
 
+- Infer tflite File
+```bash
+    python test_tflite.py
+```
+
 ## Raspberry Pi 4
 [Pi image installation instructions](https://github.com/Qengineering/TensorFlow_Lite_SSD_RPi_64-bits)
+[TensorFlow Lite Python object detection example with Pi Camera](https://github.com/tensorflow/examples/tree/master/lite/examples/object_detection/raspberry_pi)
+
+## Legacy
+- generate_dataset_old.py
+```bash
+    python generate_dataset_old.py --data_dir="d:/tensorflow_dataset"
+```
+
+고정된 크기 300 x 300, A ~ D 만 사용하여 Dataset 생성
+
+- model_zoo/ssd_mobilenet_v2_320x320_coco17_tpu-8/pipeline_old.config
+
+A ~ D 만 사용하는 config 파일
+
 
 ## Reference
 - [Training and Evaluation with TensorFlow 2](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf2_training_and_evaluation.md)
 - [MNIST Object Detection dataset](https://github.com/hukkelas/MNIST-ObjectDetection)
 - [2.1. Custom Dataset으로 TFRecord 파일 만들기](https://ballentain.tistory.com/48)
 - [Install 64 bit OS on Raspberry Pi 4 + USB boot](https://qengineering.eu/install-raspberry-64-os.html)
+- [TensorFlow Datasets, A collection of ready-to-use datasets](https://www.tensorflow.org/datasets/overview)
+- Cohen, G., Afshar, S., Tapson, J., & Van Schaik, A. (2017, May). EMNIST: Extending MNIST to handwritten letters. In 2017 International Joint Conference on Neural Networks (IJCNN) (pp. 2921-2926). IEEE.
+- Sandler, M., Howard, A., Zhu, M., Zhmoginov, A., & Chen, L. C. (2018). Mobilenetv2: Inverted residuals and linear bottlenecks. In Proceedings of the IEEE conference on computer vision and pattern recognition (pp. 4510-4520).
+- Liu, W., Anguelov, D., Erhan, D., Szegedy, C., Reed, S., Fu, C. Y., & Berg, A. C. (2016, October). Ssd: Single shot multibox detector. In European conference on computer vision (pp. 21-37). Springer, Cham.
