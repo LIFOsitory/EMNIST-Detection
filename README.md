@@ -1,4 +1,4 @@
-# EMNIST detection with fine-tuned Mobilenet-SSD on Raspberry Pi 4
+# EMNIST detection with fine-tuned Mobilenet_v2-SSD on Raspberry Pi 4
 [![TensorFlow 2.5.0](https://img.shields.io/badge/TensorFlow-2.5.0-FF6F00?logo=tensorflow&style=flat-square)](https://github.com/tensorflow/tensorflow/releases/tag/v2.5.0)
 [![Python 3.8.8](https://img.shields.io/badge/Python-3.8.8-3776AB?logo=python&style=flat-square)](https://www.python.org/downloads/release/python-388/)
 [![Anaconda 4.10.1](https://img.shields.io/badge/Anaconda-4.10.1-44A833?logo=anaconda&style=flat-square)](https://github.com/conda/conda/releases/tag/4.10.1)
@@ -51,6 +51,8 @@ A ~ Z, Random Crop, Gaussian Blur
 ❗ 파일의 용량이 매우 큽니다.
 
 ![Image of Dataset Example](dataset_example.jpg)
+
+
 - Run visualize_dataset.py
 ```bash
     python visualize_dataset.py
@@ -112,6 +114,8 @@ A ~ Z, Random Crop, Gaussian Blur
 ```bash
     python generate_dataset_old.py --data_dir="d:/tensorflow_dataset"
 ```
+
+![Image of Dataset Legacy Example](dataset_example_old.jpg)
 
 고정된 크기 300 x 300, A ~ D 만 사용하여 Dataset 생성
 
