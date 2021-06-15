@@ -204,30 +204,34 @@ if __name__ == "__main__":
     parser.add_argument(
         "--subset", default='letters', type=str
     )
+    parser.add_argument(
+        "--data_dir", default='~/tensorflow_dataset', type=str
+    )
+
     args = parser.parse_args()
 
     emnist_letters_train_image, emnist_letters_train_label = tfds.as_numpy(tfds.load(
-        'emnist/letters',
+        f'emnist/{args.subset}',
         split='train',
         batch_size=-1,
         as_supervised=True,
         shuffle_files=True,
-        data_dir="d:/tensorflow_dataset/"
+        data_dir=args.data_dir
     ))
 
     emnist_letters_test_image, emnist_letters_test_label = tfds.as_numpy(tfds.load(
-        'emnist/letters',
+        f'emnist/{args.subset}',
         split='test',
         batch_size=-1,
         as_supervised=True,
         shuffle_files=True,
-        data_dir="d:/tensorflow_dataset/"
+        data_dir=args.data_dir
     ))
 
     coco_train_ds = tfds.load(
         'coco/2017',
         split='train',
-        data_dir="d:/tensorflow_dataset/",
+        data_dir=args.data_dir,
         shuffle_files=True
     )
     assert isinstance(coco_train_ds, tf.data.Dataset)
@@ -235,7 +239,7 @@ if __name__ == "__main__":
     coco_test_ds = tfds.load(
         'coco/2017',
         split='test',
-        data_dir="d:/tensorflow_dataset/",
+        data_dir=args.data_dir,
         shuffle_files=True,
     )
     assert isinstance(coco_test_ds, tf.data.Dataset)
