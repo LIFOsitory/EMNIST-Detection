@@ -7,6 +7,7 @@
 > This repository is forked from [tensorflow/models](https://github.com/tensorflow/models) and modified by LIFOsitory
 
 - Append and Modified Directory and Files
+    - custom_models
     - model_zoo
     - generate_dataset_old.py
     - generate_dataset.py
@@ -97,7 +98,10 @@ A ~ Z, Random Crop
 ```
 
 ## Raspberry Pi 4
+- C++
 [Pi image installation instructions](https://github.com/Qengineering/TensorFlow_Lite_SSD_RPi_64-bits)
+
+- Python
 [TensorFlow Lite Python object detection example with Pi Camera](https://github.com/tensorflow/examples/tree/master/lite/examples/object_detection/raspberry_pi)
 
 ## Legacy
