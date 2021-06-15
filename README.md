@@ -16,6 +16,7 @@
     - generate_tflite.py
     - infer_ckpt.py
     - test_tflite.py
+    - detect_old.tflite
 
 ## Install Object Detection API with TensorFlow 2
 
@@ -115,6 +116,14 @@ A ~ Z, Random Crop
 - model_zoo/ssd_mobilenet_v2_320x320_coco17_tpu-8/pipeline_old.config
 
 A ~ D 만 사용하는 config 파일
+
+- custom_models/ssd_mobilenet_v2_320x320_coco17_tpu-8_old
+
+A ~ D 만을 학습한 ckpt 파일  (step 50000)
+
+- detect_old.tflite
+
+A ~ D 만 탐지하는 tflite 파일
 
 
 ## Reference
