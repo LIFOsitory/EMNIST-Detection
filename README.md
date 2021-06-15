@@ -6,17 +6,17 @@
 
 > This repository is forked from [tensorflow/models](https://github.com/tensorflow/models) and modified by LIFOsitory
 
-- Append and Modified Directory and Files
-    - custom_models
-    - model_zoo
-    - generate_dataset_old.py
-    - generate_dataset.py
-    - visualize_dataset.py
-    - generate_tfrecord.py
-    - generate_tflite.py
-    - infer_ckpt.py
-    - test_tflite.py
-    - detect_old.tflite
+**Append and Modified Directory and Files**
+- custom_models
+- model_zoo
+- generate_dataset_old.py
+- generate_dataset.py
+- visualize_dataset.py
+- generate_tfrecord.py
+- generate_tflite.py
+- infer_ckpt.py
+- test_tflite.py
+- detect_old.tflite
 
 ## Install Object Detection API with TensorFlow 2
 
@@ -52,13 +52,12 @@ A ~ Z, Random Crop, Gaussian Blur
 
 ![Image of Dataset Example](dataset_example.jpg)
 
-
 - Run visualize_dataset.py
 ```bash
     python visualize_dataset.py
 ``` 
 
-## TFRecord
+## Generating a TFRecord file
 - Run generate_tfrecord.py
 ```bash
     python generate_tfrecord.py
@@ -68,44 +67,63 @@ A ~ Z, Random Crop, Gaussian Blur
 > [Training and evaluation guide (CPU, GPU, or TPU)](research/object_detection/g3doc/tf2_training_and_evaluation.md#Local)
 
 ### Training Command
+
+A local training job can be run with the following command:
+
 ```bash
     python object_detection/model_main_tf2.py --pipeline_config_path="model_zoo/ssd_mobilenet_v2_320x320_coco17_tpu-8/pipeline.config" --model_dir="custom_models/ssd_mobilenet_v2_320x320_coco17_tpu-8" --alsologtostderr
 ```
 ### Evaluation Command
+
+A local evaluation job can be run with the following command:
+
 ```bash
     python object_detection/model_main_tf2.py --pipeline_config_path="model_zoo/ssd_mobilenet_v2_320x320_coco17_tpu-8/pipeline.config" --model_dir="custom_models/ssd_mobilenet_v2_320x320_coco17_tpu-8" --checkpoint_dir="custom_models\ssd_mobilenet_v2_320x320_coco17_tpu-8" --alsologtostderr
 ```
 ### Running Tensorboard
+
+Progress for training and eval jobs can be inspected using Tensorboard. If using the recommended directory structure, Tensorboard can be run using the following command:
+
 ```bash
     tensorboard --logdir="custom_models/ssd_mobilenet_v2_320x320_coco17_tpu-8"
 ```
 
 ### Infer Checkpoint File
+
 ```bash
     python infer_ckpt.py
 ```
 
-## TFLite Convertor
-- convert ckpt to pb
+## Running TF2 Models on Raspberry Pi
+> [Running TF2 Detection API Models on mobile](research/object_detection/g3doc/running_on_mobile_tf2.md#step-1-export-tflite-inference-graph)
+### Export TFLite inference grpah
+
+An intermediate SavedModel that can be used with the TFLite Converter via commandline or Python API can be generated with the following command: 
+
 ```bash
     python object_detection/export_tflite_graph_tf2.py --pipeline_config_path "model_zoo/ssd_mobilenet_v2_320x320_coco17_tpu-8/pipeline.config" --trained_checkpoint_dir "custom_models\ssd_mobilenet_v2_320x320_coco17_tpu-8" --output_directory "custom_models/ssd_mobilenet_v2_320x320_coco17_tpu-8"
 ```
-- convert pb to tflite
+### Convert to TFLite
+
+The SavedModel can be converted to TFLite with the following command: 
+
 ```bash
     python generate_tflite.py
 ```
 
-- Infer tflite File
+You can infer the TFLite file with the following command:
+
 ```bash
     python test_tflite.py
 ```
 
-## Raspberry Pi 4
-- C++
+### Running model on Raspberry Pi 4
+
+#### C++
 
 [Pi image installation instructions](https://github.com/Qengineering/TensorFlow_Lite_SSD_RPi_64-bits)
 
-- Python
+#### Python
 
 [TensorFlow Lite Python object detection example with Pi Camera](https://github.com/tensorflow/examples/tree/master/lite/examples/object_detection/raspberry_pi)
 
@@ -143,6 +161,7 @@ A ~ D 만 탐지하는 tflite 파일
 - [Training and Evaluation with TensorFlow 2](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf2_training_and_evaluation.md)
 - [MNIST Object Detection dataset](https://github.com/hukkelas/MNIST-ObjectDetection)
 - [2.1. Custom Dataset으로 TFRecord 파일 만들기](https://ballentain.tistory.com/48)
+- [How to Create to a TFRecord File for Computer Vision and Object Detection](https://blog.roboflow.com/create-tfrecord/)
 - [Install 64 bit OS on Raspberry Pi 4 + USB boot](https://qengineering.eu/install-raspberry-64-os.html)
 - [TensorFlow Datasets, A collection of ready-to-use datasets](https://www.tensorflow.org/datasets/overview)
 - Cohen, G., Afshar, S., Tapson, J., & Van Schaik, A. (2017, May). EMNIST: Extending MNIST to handwritten letters. In 2017 International Joint Conference on Neural Networks (IJCNN) (pp. 2921-2926). IEEE.
