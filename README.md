@@ -4,11 +4,19 @@
 [![Anaconda 4.10.1](https://img.shields.io/badge/Anaconda-4.10.1-44A833?logo=anaconda&style=flat-square)](https://github.com/conda/conda/releases/tag/4.10.1)
 [![Raspberry Pi 4](https://img.shields.io/badge/Raspberry%20Pi-4%20Model%20B-A22846?logo=Raspberry%20Pi&style=flat-square)](https://www.raspberrypi.org/products/raspberry-pi-4-model-b/)
 
+> This repository is forked from [tensorflow/models](https://github.com/tensorflow/models) and modified by LIFOsitory
+
+- Append and Modified Files
+    - generate_dataset.py
+    - visualize_dataset.py
+    - generate_tfrecord.py
+    - generate_tflite.py
+
 ## Install Object Detection API with TensorFlow 2
 
 ### Python Package Installation
 
-```powershell
+```bash
 cd models/research
 # Compile protos.
 protoc object_detection/protos/*.proto --python_out=.
@@ -20,25 +28,26 @@ python object_detection/builders/model_builder_tf2_test.py
 ```
 
 ## EMNIST(letters) Object Detection Dataset
-❗ A, B, C, D만 사용하였습니다.
 
 ![Image of Dataset Generate Example](dataset_generate_example.png)
 - Run generate_dataset.py
-```powershell
+```bash
     python generate_dataset.py --data_dir="d:/tensorflow_dataset"
 ``` 
 
 ❗ COCO 2017을 사용하므로 다운로드 및 압축 해제 시간이 오래 걸립니다.(1~2시간)
 
+❗ 파일의 용량이 매우 큽니다.
+
 ![Image of Dataset Example](dataset_example.jpg)
 - Run visualize_dataset.py
-```powershell
+```bash
     python visualize_dataset.py
 ``` 
 
 ## TFRecord
 - Run generate_tfrecord.py
-```powershell
+```bash
     python generate_tfrecord.py
 ```
 
@@ -46,25 +55,25 @@ python object_detection/builders/model_builder_tf2_test.py
 > [Training and evaluation guide (CPU, GPU, or TPU)](research/object_detection/g3doc/tf2_training_and_evaluation.md#Local)
 
 ### Training Command
-```powershell
+```bash
     python object_detection/model_main_tf2.py --pipeline_config_path="model_zoo/ssd_mobilenet_v2_320x320_coco17_tpu-8/pipeline.config" --model_dir="custom_models/ssd_mobilenet_v2_320x320_coco17_tpu-8" --alsologtostderr
 ```
 ### Evaluation Command
-```powershell
+```bash
     python object_detection/model_main_tf2.py --pipeline_config_path="model_zoo/ssd_mobilenet_v2_320x320_coco17_tpu-8/pipeline.config" --model_dir="custom_models/ssd_mobilenet_v2_320x320_coco17_tpu-8" --checkpoint_dir="custom_models\ssd_mobilenet_v2_320x320_coco17_tpu-8" --alsologtostderr
 ```
 ### Running Tensorboard
-```powershell
+```bash
     tensorboard --logdir="custom_models/ssd_mobilenet_v2_320x320_coco17_tpu-8"
 ```
 
 ## TFLite Convertor
 - convert ckpt to pb
-```powershell
+```bash
     python object_detection/export_tflite_graph_tf2.py --pipeline_config_path "model_zoo/ssd_mobilenet_v2_320x320_coco17_tpu-8/pipeline.config" --trained_checkpoint_dir "custom_models\ssd_mobilenet_v2_320x320_coco17_tpu-8" --output_directory "custom_models/ssd_mobilenet_v2_320x320_coco17_tpu-8"
 ```
 - convert pb to tflite
-```powershell
+```bash
     python generate_tflite.py
 ```
 
