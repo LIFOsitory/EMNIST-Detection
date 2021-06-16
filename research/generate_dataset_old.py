@@ -199,9 +199,6 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    # (X_train, Y_train) = emnist.extract_training_samples(args.subset)
-    # (X_test, Y_test) = emnist.extract_test_samples(args.subset)
-
     emnist_letters_train_image, emnist_letters_train_label = tfds.as_numpy(tfds.load(
         f'emnist/{args.subset}',
         split='train',

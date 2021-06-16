@@ -1,5 +1,7 @@
 import tensorflow as tf
 import time
+
+from tensorflow._api.v2 import data
 from object_detection.utils import label_map_util
 from object_detection.utils import config_util
 from object_detection.utils import visualization_utils as viz_utils
@@ -8,14 +10,26 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 import matplotlib
 import matplotlib.pyplot as plt
-import warnings
 from six import BytesIO
 import os
+import argparse
 
-PATH_TO_MODEL_DIR = "custom_models/ssd_mobilenet_v2_320x320_coco17_tpu-8"
-PATH_TO_SAVED_MODEL = PATH_TO_MODEL_DIR + "/saved_model"
-IMAGE_PATHS = "dataset/emnist_letters_detection/test/images"
-PATH_TO_LABELS = "dataset/emnist_letters_detection/label_map.pbtxt"
+parser = argparse.ArgumentParser()
+parser.add_argument(
+  "--pipeline_config_path", type=str
+)
+parser.add_argument(
+  "--checkpoint_dir", type=str
+)
+parser.add_argument(
+  "--checkpoint_number", type=str
+)
+parser.add_argument(
+  "--test_image_path", type=str
+)
+
+args = parser.parse_args()
+
 matplotlib.use('TKAgg')
 
 def load_image_into_numpy_array(path):
@@ -52,8 +66,8 @@ def get_keypoint_tuples(eval_config):
     tuple_list.append((edge.start, edge.end))
   return tuple_list
 
-pipeline_config = 'model_zoo/ssd_mobilenet_v2_320x320_coco17_tpu-8/pipeline.config'
-model_dir = 'custom_models/ssd_mobilenet_v2_320x320_coco17_tpu-8/'
+pipeline_config = args.pipeline_config_path
+checkpoint_dir = args.checkpoint_dir
 
 # Load pipeline config and build a detection model
 configs = config_util.get_configs_from_pipeline_file(pipeline_config)
@@ -67,7 +81,7 @@ start_time = time.time()
 # Restore checkpoint
 ckpt = tf.compat.v2.train.Checkpoint(
       model=detection_model)
-ckpt.restore(os.path.join(model_dir, 'ckpt-51')).expect_partial()
+ckpt.restore(os.path.join(checkpoint_dir, args.checkpoint_number)).expect_partial()
 
 end_time = time.time()
 elapsed_time = end_time - start_time
@@ -100,7 +114,7 @@ category_index = label_map_util.create_category_index(categories)
 label_map_dict = label_map_util.get_label_map_dict(label_map, use_display_name=True)
 
 
-image_path = "dataset/emnist_letters_detection/test/test.jpg"
+image_path = args.test_image_path
 image_np = load_image_into_numpy_array(image_path)
 
 print('Running inference for {}... '.format(image_path), end='')

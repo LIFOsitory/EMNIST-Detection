@@ -95,6 +95,8 @@ A local evaluation job can be run with the following command:
     python object_detection/model_main_tf2.py --pipeline_config_path="model_zoo/ssd_mobilenet_v2_320x320_coco17_tpu-8/pipeline.config" --model_dir="custom_models/ssd_mobilenet_v2_320x320_coco17_tpu-8" --checkpoint_dir="custom_models\ssd_mobilenet_v2_320x320_coco17_tpu-8" --alsologtostderr
 ```
 
+![Image of Prediction Example](dataset_pred.png)
+
 ### Running Tensorboard
 
 Progress for training and eval jobs can be inspected using Tensorboard. If using the recommended directory structure, Tensorboard can be run using the following command:
@@ -103,11 +105,13 @@ Progress for training and eval jobs can be inspected using Tensorboard. If using
     tensorboard --logdir="custom_models/ssd_mobilenet_v2_320x320_coco17_tpu-8"
 ```
 
+![Image of Loss Example](loss_example.jpg)
+
 ### Run inference with checkpoint file
 > [Run inference with models from the zoo](research/object_detection/colab_tutorials/inference_tf2_colab.ipynb)
 
 ```bash
-    python infer_ckpt.py
+    python infer_ckpt.py --pipeline_config_path="model_zoo/ssd_mobilenet_v2_320x320_coco17_tpu-8/pipeline.config" --checkpoint_dir="custom_models/ssd_mobilenet_v2_320x320_coco17_tpu-8/" --checkpoint_number="ckpt-52" --test_image_path="dataset/emnist_letters_detection/test/images/541.jpg" 
 ```
 
 ## Run TF2 Models on Raspberry Pi
@@ -118,7 +122,7 @@ Progress for training and eval jobs can be inspected using Tensorboard. If using
 An intermediate SavedModel that can be used with the TFLite Converter via commandline or Python API can be generated with the following command: 
 
 ```bash
-    python object_detection/export_tflite_graph_tf2.py --pipeline_config_path "model_zoo/ssd_mobilenet_v2_320x320_coco17_tpu-8/pipeline.config" --trained_checkpoint_dir "custom_models\ssd_mobilenet_v2_320x320_coco17_tpu-8" --output_directory "custom_models/ssd_mobilenet_v2_320x320_coco17_tpu-8"
+    python object_detection/export_tflite_graph_tf2.py --pipeline_config_path "model_zoo/ssd_mobilenet_v2_320x320_coco17_tpu-8/pipeline.config" --trained_checkpoint_dir "custom_models/ssd_mobilenet_v2_320x320_coco17_tpu-8" --output_directory "custom_models/ssd_mobilenet_v2_320x320_coco17_tpu-8"
 ```
 
 ### Convert to TFLite
