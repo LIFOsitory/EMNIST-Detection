@@ -61,7 +61,8 @@ Dataset for object detection on EMNIST letters with COCO 2017 Background. By def
 - 26 Classes(A ~ Z)
 - Between 1 and 5 letters per image
 - Gaussian Blur
-
+- Threshold 200
+    - If the pixel value of EMNIST exceeds the threshold, replace it with COCO image)
 ### Generate dataset
 
 
@@ -175,8 +176,9 @@ You can infer the TFLite file with the following command:
 
 파일이나 폴더명 뒤에 _old가 붙은 경우 다음의 조건에서 생성된 파일:
 
-- 고정된 크기 300 x 300 (resize)
-- A ~ D 만 사용하여 Dataset 생성
+- fixed size 300 x 300 by resizing
+- 4 Classes(A ~ D)
+- Threshold 255
 
 ### Generate dataset
 
