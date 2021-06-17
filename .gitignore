@@ -100,3 +100,5 @@ ENV/
 # Custom dataset
 research/dataset/emnist_letters_detection/train
 research/dataset/emnist_letters_detection/test
+research/dataset/emnist_letters_detection_old/train
+research/dataset/emnist_letters_detection_old/test

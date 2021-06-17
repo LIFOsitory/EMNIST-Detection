@@ -6,9 +6,10 @@
 
 > This repository is forked from [tensorflow/models](https://github.com/tensorflow/models) and modified by [LIFOsitory](https://github.com/LIFOsitory)
 
-### Appended and Modified Directories and Files
+### Appended Directories and Files
 - custom_models
 - model_zoo
+- dataset
 - generate_dataset_old.py
 - generate_dataset.py
 - visualize_dataset.py
@@ -16,7 +17,17 @@
 - generate_tflite.py
 - infer_ckpt.py
 - test_tflite.py
+- detect.tflite
 - detect_old.tflite
+
+🧡 visualize_dataset.py을 제외하곤 레퍼런스를 바탕으로 전부 직접 수정하거나 생성하였습니다. ￣︶￣）↗
+
+🧡 dataset 파일이 너무 큰 관계로 train, test 폴더는 제외하였습니다.
+
+## Install CUDA and cuDNN on Windows
+> [CUDA TOOKIT DOCUMENTATION](https://docs.nvidia.com/cuda/cuda-installation-guide-microsoft-windows/index.html)
+
+> [NVIDIA CUDNN DOCUMENTAION](https://docs.nvidia.com/deeplearning/cudnn/install-guide/index.html#install-windows)
 
 ## Install Object Detection API with TensorFlow 2
 > [Object Detection API with TensorFlow 2](research/object_detection/g3doc/tf2.md#installation)
@@ -87,6 +98,8 @@ A local training job can be run with the following command:
     python object_detection/model_main_tf2.py --pipeline_config_path="model_zoo/ssd_mobilenet_v2_320x320_coco17_tpu-8/pipeline.config" --model_dir="custom_models/ssd_mobilenet_v2_320x320_coco17_tpu-8" --alsologtostderr
 ```
 
+💡 Traing Step: 50000
+
 ### Evaluation Command
 
 A local evaluation job can be run with the following command:
@@ -149,33 +162,26 @@ You can infer the TFLite file with the following command:
 
 [TensorFlow Lite Python object detection example with Pi Camera](https://github.com/tensorflow/examples/tree/master/lite/examples/object_detection/raspberry_pi)
 
+🚩 둘 다 속도는 빠르나 카메라 사용시 정확도가 현저히 떨어집니다. (TヘTo)
+
+🚩 Dataset 생성 방식을 바꾸거나 다른 Dataset의 활용을 고려해봐야겠습니다.
+
 ## Legacy
-- generate_dataset_old.py
-```bash
-    python generate_dataset_old.py --data_dir="d:/tensorflow_dataset"
-```
+
+파일이나 폴더명 뒤에 _old가 붙은 경우 다음의 조건에서 생성된 파일:
+
+- 고정된 크기 300 x 300 (resize)
+- A ~ D 만 사용하여 Dataset 생성
+
+### Generate dataset
 
 ![Image of Dataset Legacy Example](dataset_example_old.jpg)
 
-고정된 크기 300 x 300, A ~ D 만 사용하여 Dataset 생성
-
-- model_zoo/ssd_mobilenet_v2_320x320_coco17_tpu-8/pipeline_old.config
-
-A ~ D 만 사용하는 config 파일
-
-- custom_models/ssd_mobilenet_v2_320x320_coco17_tpu-8_old
-
-A ~ D 만을 학습한 ckpt 파일  (step 50000)
-
-- detect_old.tflite
-
-A ~ D 만 탐지하는 tflite 파일
-
-- Evaluation Sample
+### Evaluation
 
 ![Image of Prediction Example](dataset_predict_old.png)
 
-- 일반적인 글자 이미지에 대해서 학습하지 않아 구글 이미지에 대해서는 성능이 좋지 못함.
+일반적인 글자 이미지에 대해서 학습하지 않아 구글 이미지에 대해서는 성능이 좋지 못함.
  
 ![A in google image](example_a_old.jpg)
 
