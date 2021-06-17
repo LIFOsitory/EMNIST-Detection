@@ -22,6 +22,8 @@
 - detect.tflite
 - detect_old.tflite
 
+🧡 [research](https://github.com/LIFOsitory/EMNIST-Detection/tree/master/research) 안에서 작업하였습니다.
+
 🧡 visualize_dataset.py을 제외하곤 레퍼런스를 바탕으로 전부 직접 수정하거나 생성하였습니다.
 
 🧡 dataset 파일이 너무 큰 관계로 train, test 폴더는 제외하였습니다.
@@ -62,7 +64,7 @@ Dataset for object detection on EMNIST letters with COCO 2017 Background. By def
 - Between 1 and 5 letters per image
 - Gaussian Blur
 - Threshold 200
-    - If the pixel value of EMNIST exceeds the threshold, replace it with COCO image)
+    - If the pixel value of EMNIST exceeds the threshold, replace it with COCO image
 ### Generate dataset
 
 
