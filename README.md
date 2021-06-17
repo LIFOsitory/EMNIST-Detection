@@ -49,6 +49,7 @@ python object_detection/builders/model_builder_tf2_test.py
 ```
 
 ## Generate EMNIST letters Object Detection dataset
+> [MNIST Object Detection dataset](https://github.com/hukkelas/MNIST-ObjectDetection)
 
 ![Image of Dataset Example](dataset_example.jpg)
 
@@ -60,7 +61,7 @@ Dataset for object detection on EMNIST letters with COCO 2017 Background. By def
 - Gaussian Blur
 
 ### Generate dataset
-> [MNIST Object Detection dataset](https://github.com/hukkelas/MNIST-ObjectDetection)
+
 
 ![Image of Dataset Generate Example](dataset_generate_example.png)
 
