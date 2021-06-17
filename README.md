@@ -183,6 +183,8 @@ You can infer the TFLite file with the following command:
 - fixed size 300 x 300 by resizing
 - 4 Classes(A ~ D)
 - Threshold 255
+- NO Random Crop
+- NO Random Horizontal Flip
 
 ### Generate dataset
 
