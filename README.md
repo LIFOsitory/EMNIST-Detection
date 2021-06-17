@@ -23,6 +23,7 @@
 🧡 visualize_dataset.py을 제외하곤 레퍼런스를 바탕으로 전부 직접 수정하거나 생성하였습니다.
 
 🧡 dataset 파일이 너무 큰 관계로 train, test 폴더는 제외하였습니다.
+generate dataset.py를 통해 생성할 수 있습니다.
 
 ## Install CUDA and cuDNN on Windows
 > [CUDA TOOLKIT DOCUMENTATION](https://docs.nvidia.com/cuda/cuda-installation-guide-microsoft-windows/index.html)
