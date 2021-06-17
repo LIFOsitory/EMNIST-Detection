@@ -85,7 +85,6 @@ ckpt.restore(os.path.join(checkpoint_dir, args.checkpoint_number)).expect_partia
 
 end_time = time.time()
 elapsed_time = end_time - start_time
-print('Done! Took {} seconds'.format(elapsed_time))
 
 def get_model_detection_function(model):
   """Get a tf.function for detection."""
@@ -103,6 +102,8 @@ def get_model_detection_function(model):
   return detect_fn
 
 detect_fn = get_model_detection_function(detection_model)
+
+print('Done! Took {} seconds'.format(elapsed_time))
 
 label_map_path = configs['eval_input_config'].label_map_path
 label_map = label_map_util.load_labelmap(label_map_path)

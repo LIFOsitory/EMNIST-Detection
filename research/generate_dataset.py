@@ -4,10 +4,12 @@ from sys import builtin_module_names
 import cv2
 import numpy as np
 import tqdm
-# import emnist
 import os
 import tensorflow as tf
 import tensorflow_datasets as tfds
+
+# Modified By LIFOsitory
+# generate_dataset(), __main__
 
 def calculate_iou(prediction_box, gt_box):
     """Calculate intersection over union of single predicted and ground truth box.
@@ -19,7 +21,6 @@ def calculate_iou(prediction_box, gt_box):
         returns:
             float: value of the intersection of union for the two boxes.
     """
-    # YOUR CODE HERE
     x1_t, y1_t, x2_t, y2_t = gt_box
     x1_p, y1_p, x2_p, y2_p = prediction_box
     if (x2_t < x1_p or x2_p < x1_t or y2_t < y1_p or y2_p < y1_t):
@@ -98,16 +99,14 @@ def generate_dataset(dirpath: pathlib.Path,
                      num_images: int,
                      max_digit_size: int,
                      min_digit_size: int,
-                    #  imsize: int,
                      max_digits_per_image: int,
                      emnist_letters_images: np.ndarray,
                      emnist_letters_labels: np.ndarray,
                      coco_ds: tf.data.Dataset):
-    # if dataset_exists(dirpath, num_images):
-    #     return
+    if dataset_exists(dirpath, num_images):
+        return
     max_image_value = 255
     assert emnist_letters_images.dtype == np.uint8
-    # assert coco_ds.dtype == np.uint8
     image_dir = dirpath.joinpath("images")
     label_dir = dirpath.joinpath("labels")
     image_dir.mkdir(exist_ok=True, parents=True)
@@ -132,7 +131,7 @@ def generate_dataset(dirpath: pathlib.Path,
                 ious = compute_iou_all([x0, y0, x0+width, y0+width], bboxes)
                 if max(ious) < 0.1:
                     break
-            # while True:
+
             digit_idx = np.random.randint(0, len(emnist_letters_images))
             digit = emnist_letters_images[digit_idx].astype(np.float32)
             digit = cv2.resize(digit, (width, width))
@@ -144,12 +143,6 @@ def generate_dataset(dirpath: pathlib.Path,
 
             im[x0:x0+width, y0:y0+width] += digit
             im[im > max_image_value] = max_image_value
-        
-        # while True:
-        #     bg_idx = np.random.randint(0, len(coco_ds))
-        #     bg_image = coco_ds[bg_idx]["image"]
-        #     if bg_image.shape[0] >= 300 and bg_image.shape[1] >= 300:
-        #         break
 
         bg_image = tfds.as_numpy(bg_image)
         
@@ -183,9 +176,6 @@ if __name__ == "__main__":
     parser.add_argument(
         "--base-path", default="dataset/emnist_letters_detection"
     )
-    # parser.add_argument(
-    #     "--imsize", default=300, type=int
-    # )
     parser.add_argument(
         "--max-digit-size", default=200, type=int
     )
@@ -254,7 +244,6 @@ if __name__ == "__main__":
             num_images,
             args.max_digit_size,
             args.min_digit_size,
-            # args.imsize,
             args.max_digits_per_image,
             target_images,
             target_labels,

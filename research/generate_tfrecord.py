@@ -34,9 +34,6 @@ def _int64_feature(value):
 
 def image_to_tf_data(img_path, label_path, label_map_dict):
     filename = img_path.split('/')[-1]
-    # THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
-    # img_path = os.path.join(THIS_FOLDER, img_path)
-    # image
     full_path = img_path
     with tf.io.gfile.GFile(full_path, 'rb') as fid:
       encoded_jpg = fid.read()
