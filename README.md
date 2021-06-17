@@ -60,6 +60,7 @@ Dataset for object detection on EMNIST letters with COCO 2017 Background. By def
 - Gaussian Blur
 
 ### Generate dataset
+> [MNIST Object Detection dataset](https://github.com/hukkelas/MNIST-ObjectDetection)
 
 ![Image of Dataset Generate Example](dataset_generate_example.png)
 
@@ -188,7 +189,6 @@ You can infer the TFLite file with the following command:
 
 ## Reference
 - [Training and Evaluation with TensorFlow 2](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf2_training_and_evaluation.md)
-- [MNIST Object Detection dataset](https://github.com/hukkelas/MNIST-ObjectDetection)
 - [2.1. Custom Dataset으로 TFRecord 파일 만들기](https://ballentain.tistory.com/48)
 - [How to Create to a TFRecord File for Computer Vision and Object Detection](https://blog.roboflow.com/create-tfrecord/)
 - [Install 64 bit OS on Raspberry Pi 4 + USB boot](https://qengineering.eu/install-raspberry-64-os.html)
