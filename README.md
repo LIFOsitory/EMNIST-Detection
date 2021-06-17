@@ -25,9 +25,9 @@
 🧡 dataset 파일이 너무 큰 관계로 train, test 폴더는 제외하였습니다.
 
 ## Install CUDA and cuDNN on Windows
-> [CUDA TOOKIT DOCUMENTATION](https://docs.nvidia.com/cuda/cuda-installation-guide-microsoft-windows/index.html)
+> [CUDA TOOLKIT DOCUMENTATION](https://docs.nvidia.com/cuda/cuda-installation-guide-microsoft-windows/index.html)
 
-> [NVIDIA CUDNN DOCUMENTAION](https://docs.nvidia.com/deeplearning/cudnn/install-guide/index.html#install-windows)
+> [NVIDIA CUDNN DOCUMENTATION](https://docs.nvidia.com/deeplearning/cudnn/install-guide/index.html#install-windows)
 
 ## Install Object Detection API with TensorFlow 2
 > [Object Detection API with TensorFlow 2](research/object_detection/g3doc/tf2.md#installation)
