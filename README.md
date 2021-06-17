@@ -65,14 +65,16 @@ Dataset for object detection on EMNIST letters with COCO 2017 Background. By def
 - Gaussian Blur
 - Threshold 200
     - If the pixel value of EMNIST exceeds the threshold, replace it with COCO image
-### Generate dataset
 
+### Generate dataset
 
 ![Image of Dataset Generate Example](dataset_generate_example.png)
 
 ```bash
     python generate_dataset.py --data_dir="d:/tensorflow_dataset"
 ``` 
+
+❗ [Tensorflow Dataset](https://www.tensorflow.org/datasets/overview)을 통해 자동으로 다운로드 되도록 구성하였습니다.
 
 ❗ COCO 2017을 사용하므로 다운로드(25.20 GiB) 및 압축 해제 시간이 오래 걸립니다.(1~2시간)
 
